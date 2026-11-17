@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --color-navy: #07182F;
+    --color-navy-700: #0d2547;
+    --color-navy-50: #eef3fa;
+    --color-brand: #1f4e9c;
+    --color-ink: #07182F;
+    --color-muted: #666666;
+    --color-line: #EAEAEA;
+    --color-soft: #F8F9FA;
+    --color-sale: #c0392b;
+    --radius-card: 14px;
+}
+
+@layer base {
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body { @apply bg-white text-ink font-sans antialiased; }
+    [x-cloak] { display: none !important; }
+    h1, h2, h3, h4 { @apply font-semibold tracking-tight text-navy; }
+    img { @apply max-w-full; }
+    input, select, textarea { @apply text-base sm:text-sm; }
+}
+
+@layer components {
+    .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition duration-200 select-none disabled:opacity-50 disabled:cursor-not-allowed; }
+    .btn-primary { @apply bg-navy text-white hover:bg-navy-700 active:scale-[.98]; }
+    .btn-outline { @apply border border-line bg-white text-navy hover:border-navy; }
+    .btn-ghost { @apply text-navy hover:bg-soft; }
+    .btn-sm { @apply px-3.5 py-2 text-xs; }
+    .field { @apply w-full rounded-xl border border-line bg-white px-3.5 py-3 text-ink placeholder:text-gray-400 outline-none transition focus:border-navy focus:ring-2 focus:ring-navy/10; }
+    .label { @apply mb-1.5 block text-sm font-medium text-navy; }
+    .card { @apply rounded-[14px] border border-line bg-white; }
+    .container-x { @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8; }
+    .badge { @apply inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold; }
+    .prose-tb { @apply text-[15px] leading-7 text-[#444]; }
+    .prose-tb h2 { @apply mt-8 mb-3 text-2xl; } .prose-tb h3 { @apply mt-6 mb-2 text-lg; }
+    .prose-tb p { @apply mb-4; } .prose-tb ul { @apply mb-4 list-disc pl-6; } .prose-tb ol { @apply mb-4 list-decimal pl-6; }
+    .prose-tb a { @apply text-brand underline; } .prose-tb img { @apply my-4 rounded-xl; }
+    .prose-tb table { @apply my-4 w-full border-collapse text-sm; } .prose-tb td, .prose-tb th { @apply border border-line p-2; }
+    .prose-tb blockquote { @apply my-4 border-l-4 border-navy/20 pl-4 italic; }
+    .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { scrollbar-width: none; }
+    .mobile-safe { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
+}
+
+@media (min-width: 1024px) { .mobile-safe { padding-bottom: 0; } }

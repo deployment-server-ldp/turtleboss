@@ -1,0 +1,8 @@
+@extends('admin.layouts.admin')
+@section('title', 'Inbox & Subscribers')
+@section('content')
+<h2 class="mb-3 text-base">Contact messages</h2>
+<div class="space-y-3">@forelse($messages as $m)<div class="card p-4 {{ $m->is_read ? 'opacity-70' : '' }}"><div class="flex flex-wrap justify-between gap-2 text-sm"><p><b>{{ $m->name }}</b> · <a href="mailto:{{ $m->email }}" class="text-brand">{{ $m->email }}</a> {{ $m->phone }}</p><span class="text-xs text-muted">{{ $m->created_at->format('d M Y H:i') }}</span></div><p class="mt-2 whitespace-pre-line text-sm">{{ $m->message }}</p><div class="mt-2 flex gap-3 text-xs">@unless($m->is_read)<form method="post" action="{{ route('admin.inbox.read', $m) }}">@csrf<button class="text-brand">Mark read</button></form>@endunless<form method="post" action="{{ route('admin.inbox.delete', $m) }}" onsubmit="return confirm('Delete?')">@csrf @method('DELETE')<button class="text-red-600">Delete</button></form></div></div>@empty<div class="card p-8 text-center text-muted">No messages.</div>@endforelse</div>{{ $messages->links() }}
+<div class="mb-3 mt-8 flex items-center justify-between"><h2 class="text-base">Newsletter subscribers ({{ $subscriberCount }})</h2><a href="{{ route('admin.subscribers.export') }}" class="btn btn-outline btn-sm">⬇ Export CSV</a></div>
+<div class="card divide-y divide-line text-sm">@forelse($subscribers as $s)<div class="flex justify-between p-3"><span>{{ $s->email }}</span><span class="text-xs text-muted">{{ $s->created_at->format('d M Y') }}</span></div>@empty<p class="p-6 text-center text-muted">No subscribers.</p>@endforelse</div>{{ $subscribers->links() }}
+@endsection
